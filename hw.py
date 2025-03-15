@@ -53,10 +53,47 @@ def draw():
     screen.draw.textbox(str(time_left),timer_box,color = "#A40606",shadow = (0.5,0.5),scolor = "grey")
     screen.draw.textbox("Skip",skip_box,color = "#131200",angle =-90)
     screen.draw.textbox(f"Score: {score}",score_box,color = "#2B2D42")
-    screen.draw.textbox("Hi",question_box,color = "#FF2E00",shadow = (0.5,0.5),scolor = "#2A0800")
+    screen.draw.textbox(question[0].strip(),question_box,color = "#FF2E00",shadow = (0.5,0.5),scolor = "#2A0800")
 
+    index = 1
+    for answer_box in answer_boxes:
+        screen.draw.textbox(question[index].strip(),answer_box,color = "#440381")
+        index = index + 1
 
 def update():
-    pass
+    move_marquee()
+
+def move_marquee():
+    marquee_box.x = marquee_box.x - 2
+    if marquee_box.right < 0:
+        marquee_box.left = WIDTH
+
+def read_question_file():
+    global questions, question_count
+    q_file = open(question_file,"r")
+    for question in q_file:
+        questions.append(question)
+        question_count = question_count + 1
+    q_file.close()
+
+def read_next_question():
+    global question_index
+    question_index = question_index + 1
+    return questions.pop(0).split(",")
+
+def on_mouse_down(pos):
+    index = 1
+    for answer_box in answer_boxes:
+        if answer_box.collidepoint(pos):
+            if index == int(question[5]):
+                correct_answer()
+            else:
+                game_over()
+        index = index + 1
+    if skip_box.collidepoint(pos):
+        skip_question()
+
+
+
 
 pgzrun.go()
