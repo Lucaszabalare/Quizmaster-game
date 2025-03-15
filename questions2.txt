@@ -1,0 +1,9 @@
+How many hours do cats sleep for?,12-16,10-18,24,0,1 
+When did cats get domesticated in years?,100000,0,10000,2025,3 
+Which cat is known for being overweight?, Tom,bobcat,catblob, susie,4 
+When do cats become adults in years?,1-2,10-12,14-15,8,1 
+How long is a cats lifespan?,5-10,13-20,15-20,16-20,2 
+How many cat breeds are there?,134,168,104,73,4 
+How many estimated cats are there in the world in millions?,1400,600,1040,980,2 
+Which country owns Cat Island?,Japan,China,Italy,England,1 
+Which cat destroyed the universe with a yawn?,BIGCAT,BIGGERCAT,susie,smallcat,3
