@@ -17,12 +17,12 @@ score_box = Rect(0,0,150,50)
 
 time_left = 9
 score = 0
-question_file = "questions.txt"
+question_file = "questions2.txt"
 questions = []
 question_count = 0
 question_index = 0
 answer_boxes = [answer_box1,answer_box2,answer_box3,answer_box4]
-game_over = False
+is_game_over = False
 marquee_msg = ""
 
 marquee_box.move_ip(0,0)
@@ -93,7 +93,40 @@ def on_mouse_down(pos):
     if skip_box.collidepoint(pos):
         skip_question()
 
+def correct_answer():
+    global score, questions,question,time_left
+    score = score + 1
+    if questions:
+        question = read_next_question()
+        time_left = 10
+    else:
+        game_over()
+
+def skip_question():
+    global question, time_left
+    if questions and is_game_over != True:
+        question = read_next_question()
+        time_left = 10
+    else:
+        game_over()
+
+def game_over():
+    global is_game_over,question,time_left
+    msg = f"Game Over!You have got {score} questions correct!"
+    question = [msg,"-","-","-","-",5]
+    time_left = 0
+    is_game_over = True
 
 
+def update_time_left():
+    global time_left
+    if time_left:
+        time_left = time_left - 1
+    else:
+        game_over()
+
+read_question_file()
+question = read_next_question()
+clock.schedule_interval(update_time_left,1)
 
 pgzrun.go()
